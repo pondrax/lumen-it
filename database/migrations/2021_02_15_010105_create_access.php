@@ -17,7 +17,7 @@ class CreateAccess extends Migration
             $table->increments('id');
             $table->foreignId('role_id')->constrained('app_role');
             $table->foreignId('route_id')->constrained('app_route');
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

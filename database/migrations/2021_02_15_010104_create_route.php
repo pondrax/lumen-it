@@ -18,7 +18,7 @@ class CreateRoute extends Migration
             $table->foreignId('menu_id')->constrained('app_menu');
             $table->string('route');
             $table->string('method');
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

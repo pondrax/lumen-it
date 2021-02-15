@@ -13,18 +13,31 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+// $router->get('/', function () use ($router) {
+    // return $router->app->version();
+// });
 
-$router->get('auth', function () {
-    return 'Hello World';
-});
+/* Main API Route */
+$router->group(['prefix'=>'api'], function() use ($router){
+	$router->get('logs/{id}'	, "App\LogController@read");
 
-$router->post('register', function () {
-    //
-});
+	
+	/* Log everything */
+	$router->group(['middleware'=>['logger']], function() use ($router){	
+		
+		$router->post('auth/register'	, "App\AuthController@register");
+		$router->post('auth/login'		, "App\AuthController@login");
+		
+		$router->get('role'			, "App\RoleController@index");
+		$router->get('role/{id}'	, "App\RoleController@read");
+		$router->post('role'		, "App\RoleController@create");
+		$router->put('role/{id}'	, "App\RoleController@update");
+		$router->delete('role/{id}'	, "App\RoleController@delete");
 
-$router->post('login', function () {
-    //
+	
+		/* Only admin allowed */
+		$router->group(['middleware'=>['auth']], function() use ($router){
+				
+		});
+	});
 });
