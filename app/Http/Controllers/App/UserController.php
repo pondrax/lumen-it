@@ -3,32 +3,36 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Base\Controller;
-use App\Models\App\Role;
+use App\Models\App\User;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class UserController extends Controller
 {
 	
     public function read($id = 'all'){
-        $result = Role::table(); 
+        $result = User::table(); 
         return $this->response($result);
     }
     
     public function create(Request $request){
-		$data	= $this->validate($request, Role::rules['create']);
-		$result = Role::create($data);
+		$data	= $this->validate($request, User::rules['create']);
+		$data['password'] = app('hash')->make($data['password']);
+		$result = User::create($data);
 		return $this->response(['created'=>$result->id], 201);
     }
     
     public function update(Request $request, $id){
-		$data = $this->validate($request, Role::rules['update']);
-        $result = Role::where('id',$id)->update($data);
+		$data = $this->validate($request, User::rules['update']);
+		if(!empty($data['password']){
+			$data['password'] = app('hash')->make($data['password']);
+		}
+        $result = User::where('id',$id)->update($data);
         return $this->response(['updated'=>$id]);
     }
     
     public function delete($id){
 		$ids = explode(',',$id);
-		$result = Role::find($ids)->each(function($data, $key){
+		$result = User::find($ids)->each(function($data, $key){
 			$data->delete();
 		}); 
 		return $this->response(['deleted'=>$id]);

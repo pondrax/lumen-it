@@ -3,32 +3,32 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Base\Controller;
-use App\Models\App\Role;
+use App\Models\App\Menu;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class MenuController extends Controller
 {
 	
     public function read($id = 'all'){
-        $result = Role::table(); 
+        $result = Menu::table(); 
         return $this->response($result);
     }
     
     public function create(Request $request){
-		$data	= $this->validate($request, Role::rules['create']);
-		$result = Role::create($data);
+		$data	= $this->validate($request, Menu::rules['create']);
+		$result = Menu::create($data);
 		return $this->response(['created'=>$result->id], 201);
     }
     
     public function update(Request $request, $id){
-		$data = $this->validate($request, Role::rules['update']);
-        $result = Role::where('id',$id)->update($data);
+		$data = $this->validate($request, Menu::rules['update']);
+        $result = Menu::where('id',$id)->update($data);
         return $this->response(['updated'=>$id]);
     }
     
     public function delete($id){
 		$ids = explode(',',$id);
-		$result = Role::find($ids)->each(function($data, $key){
+		$result = Menu::find($ids)->each(function($data, $key){
 			$data->delete();
 		}); 
 		return $this->response(['deleted'=>$id]);

@@ -2,9 +2,19 @@
 
 namespace App\Models\App;
 
-use App\Models\BaseModel;
+use App\Models\Base\Model;
 
-class Menu extends BaseModel 
+class Menu extends Model 
 {
 	protected $table = 'app_menu';
+	
+	protected $guarded = [];
+	
+	const rules = [
+		'create' => [
+			'menu' => 'required'
+		],
+		'update' => []
+	]; 
+	
 }

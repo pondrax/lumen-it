@@ -2,20 +2,22 @@
 
 namespace App\Models\App;
 
-use App\Models\BaseModel;
+use App\Models\Base\Model;
 
-class Role extends BaseModel 
+class Role extends Model 
 {
 	protected $table = 'app_role';
 	
-	protected $fillable = ['role','description'];
+	protected $guarded = [];
 	
-	// protected $guarded = [];
-	
-	public function store(){
-		return [
-			'role'			=> 'required',
-			'description'	=> 'required'
-		];
-	}
+	const rules = [
+		'create' => [
+			'role' => 'required',
+			'description' => 'required'
+		],
+		'update' => [
+			'role' => 'required',
+			// 'description' => 'required'
+		]
+	]; 
 }

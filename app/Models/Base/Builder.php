@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Base;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder as BaseBuilder;
 
-class BaseBuilder extends Builder 
+class Builder extends BaseBuilder 
 {
 
     public function table()

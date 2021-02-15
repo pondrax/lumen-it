@@ -2,9 +2,22 @@
 
 namespace App\Models\App;
 
-use App\Models\BaseModel;
+use App\Models\Base\Model;
 
-class Route extends BaseModel 
+class Route extends Model 
 {
 	protected $table = 'app_route';
+	
+	protected $guarded = [];
+	
+	const rules = [
+		'create' => [
+			'menu_id' => 'required',
+			'route'   => 'required',
+			'method'  => 'required',
+		],
+		'update' => [
+			'menu_id' => 'required',
+		]
+	];
 }

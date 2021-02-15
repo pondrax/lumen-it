@@ -2,9 +2,11 @@
 
 namespace App\Models\App;
 
-use App\Models\BaseModel;
+use App\Models\Base\Model;
 
-class Logs extends BaseModel 
+class Logs extends Model 
 {
 	protected $table = 'app_logs';
+	
+	protected $guarded = [];
 }
