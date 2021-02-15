@@ -14,7 +14,7 @@
 */
 
 /* Main API Route */
-$router->group(['prefix'=>'api','middleware'=>'formdata'], function() use ($router){
+$router->group(['prefix'=>'api','middleware'=>['throwerror','formdata']], function() use ($router){
 	
 	$router->get('app/logs/{id}'	, "App\LogController@read");
 	
@@ -25,7 +25,7 @@ $router->group(['prefix'=>'api','middleware'=>'formdata'], function() use ($rout
 		$router->post('auth/login'		, "App\AuthController@login");
 	
 		/* Only admin allowed */
-		$router->group(['middleware'=>['logger']], function() use ($router){
+		$router->group(['middleware'=>['auth']], function() use ($router){
 
 			$router->get('app/role'			, "App\RoleController@index");
 			$router->get('app/role/{id}'	, "App\RoleController@read");

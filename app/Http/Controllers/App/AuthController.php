@@ -14,23 +14,27 @@ class AuthController extends Controller
 		$this->validate($request, User::rules['register']);
 		try {
             $user = new User;
-            $user->role_id	= 2;
+            $user->role_id	= 4;
             $user->email 	= $request->post('email');
             $user->username = $request->post('username');
             $user->password = app('hash')->make($request->post('password'));
             $user->save();
-            return $this->response(['user' => $user, 'message' => 'CREATED'], 201);
+            
+			$credentials = $request->only(['username', 'password']);
+			Auth::attempt($credentials);
+			
+            return $this->response(['message' => 'Registration Successfull'], 201);
+            
         } catch (\Exception $e) {
-            return $this->response(['message' => 'User Registration Failed!','error'=>$e], 409);
+            return $this->response([
+				'message' => 'Registration Failed!',
+				'error'	  => $e->getMessage()
+			], 409);
         }
     }
     
     public function login(Request $request){
-		$this->validate($request, [
-            'username' => 'required|string',
-            'password' => 'required|string',
-        ]);
-
+		$this->validate($request, User::rules['login']);
         $credentials = $request->only(['username', 'password']);
 
         if (! $token = Auth::attempt($credentials)) {

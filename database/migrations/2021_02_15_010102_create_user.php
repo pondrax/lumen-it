@@ -16,8 +16,8 @@ class CreateUser extends Migration
         Schema::create('app_user', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignId('role_id')->constrained('app_role');
-            $table->string('username');
-            $table->string('email');
+            $table->string('username')->unique();
+            $table->string('email')->unique();
             $table->string('password');
             $table->timestamps();
         });

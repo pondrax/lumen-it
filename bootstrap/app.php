@@ -80,6 +80,7 @@ $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'logger' => App\Http\Middleware\Logger::class,
     'formdata' => App\Http\Middleware\FormData::class,
+    'throwerror' => App\Http\Middleware\ThrowError::class,
 ]);
 
 /*

@@ -1,0 +1,437 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Lumen-It",
+		"_postman_id": "24a5f3f1-696f-2734-0490-ef2d3b9422c2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8000/api/auth/register",
+			"request": {
+				"url": "localhost:8000/api/auth/register",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "pondra",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pondrax3@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/auth/login",
+			"request": {
+				"url": "localhost:8000/api/auth/login",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "pondraaa",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1233242445",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/app/role/all",
+			"request": {
+				"url": "localhost:8000/api/app/role/all",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9yZWdpc3RlciIsImlhdCI6MTYxMzQwNjAyOCwiZXhwIjoxNjEzNDA5NjI4LCJuYmYiOjE2MTM0MDYwMjgsImp0aSI6ImZ2eGRra1g4ZXFTeGxOWHciLCJzdWIiOjgsInBydiI6Ijc1ZGJmMGJmZjlmYzhmZTgxMmQ0Y2MxNzdhODRmYzYyYTNiNGNjZjYifQ.v276CYtOmGaLHDxBNbIUeUNCsyQUBduqzwz711LG1kU",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "pondra",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pondrax3@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/app/user/all",
+			"request": {
+				"url": "localhost:8000/api/app/user/all",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9yZWdpc3RlciIsImlhdCI6MTYxMzQwNjAyOCwiZXhwIjoxNjEzNDA5NjI4LCJuYmYiOjE2MTM0MDYwMjgsImp0aSI6ImZ2eGRra1g4ZXFTeGxOWHciLCJzdWIiOjgsInBydiI6Ijc1ZGJmMGJmZjlmYzhmZTgxMmQ0Y2MxNzdhODRmYzYyYTNiNGNjZjYifQ.v276CYtOmGaLHDxBNbIUeUNCsyQUBduqzwz711LG1kU",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "pondra",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pondrax3@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/app/menu/all",
+			"request": {
+				"url": "localhost:8000/api/app/menu/all",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxMzQwNjY0OCwiZXhwIjoxNjEzNDEwMjQ4LCJuYmYiOjE2MTM0MDY2NDgsImp0aSI6IkdLb08yVEkyYlFBTjU1NTciLCJzdWIiOjgsInBydiI6Ijc1ZGJmMGJmZjlmYzhmZTgxMmQ0Y2MxNzdhODRmYzYyYTNiNGNjZjYifQ.TwLInAQOLcAb2NlSmXvLcmZYsm2MhhThTlm6_YqBiTY",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "pondra",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pondrax3@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/app/route/all",
+			"request": {
+				"url": "localhost:8000/api/app/route/all",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hcHBcL21lbnVcL2FsbCIsImlhdCI6MTYxMzQwNjY0OCwiZXhwIjoxNjEzNDEwMjk0LCJuYmYiOjE2MTM0MDY2OTQsImp0aSI6IkVxRFFzNG5SOUJSeXhmTXQiLCJzdWIiOjgsInBydiI6Ijc1ZGJmMGJmZjlmYzhmZTgxMmQ0Y2MxNzdhODRmYzYyYTNiNGNjZjYifQ.m44G8j7tLskquWguyNX0V2Acz_aonAqKVL1l2CzTy_s",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "pondra",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pondrax3@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/app/access/all",
+			"request": {
+				"url": "localhost:8000/api/app/access/all",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hcHBcL3JvdXRlXC9hbGwiLCJpYXQiOjE2MTM0MDY2NDgsImV4cCI6MTYxMzQxMDMxOCwibmJmIjoxNjEzNDA2NzE4LCJqdGkiOiJZckQ0RHB3VzI0blZPREpZIiwic3ViIjo4LCJwcnYiOiI3NWRiZjBiZmY5ZmM4ZmU4MTJkNGNjMTc3YTg0ZmM2MmEzYjRjY2Y2In0.ujLzuBzJqxv3dnxB0UOIoMslCjukSKEQVTAwtD6MZ64",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "pondra",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pondrax3@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/app/logs/all",
+			"request": {
+				"url": "localhost:8000/api/app/logs/all",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxMzQwNjc5NSwiZXhwIjoxNjEzNDEwMzk1LCJuYmYiOjE2MTM0MDY3OTUsImp0aSI6ImxjSFBNVXV1VjdhVWl3RWIiLCJzdWIiOjgsInBydiI6Ijc1ZGJmMGJmZjlmYzhmZTgxMmQ0Y2MxNzdhODRmYzYyYTNiNGNjZjYifQ.zqdAIRE2oheDBc1b7pXpuFLDAjT_YGOmlaGxwp19suU",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "pondra",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pondrax3@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/app/role",
+			"request": {
+				"url": "localhost:8000/api/app/role",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hcHBcL2xvZ3NcL2FsbCIsImlhdCI6MTYxMzQwNjc5NSwiZXhwIjoxNjEzNDEwNDI1LCJuYmYiOjE2MTM0MDY4MjUsImp0aSI6IjRYUU1tV2pxemwxSWk4ZVoiLCJzdWIiOjgsInBydiI6Ijc1ZGJmMGJmZjlmYzhmZTgxMmQ0Y2MxNzdhODRmYzYyYTNiNGNjZjYifQ.UgaXJM8jSA0O-8UQEVXmcEq0YLJh42qK1QtoAIo3huw",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "role",
+							"value": "nama role",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "deskripsi role",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/app/menu",
+			"request": {
+				"url": "localhost:8000/api/app/menu",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxMzQwNzI2MCwiZXhwIjoxNjEzNDEwODYwLCJuYmYiOjE2MTM0MDcyNjAsImp0aSI6IlhTSzlyWGZuMXJ1VXhld08iLCJzdWIiOjgsInBydiI6Ijc1ZGJmMGJmZjlmYzhmZTgxMmQ0Y2MxNzdhODRmYzYyYTNiNGNjZjYifQ.KbLwLPQC4lOXFCWxajyZrUiApalmCSovtaAYdyZTVcw",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "menu",
+							"value": "nama menu",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "deskripsi role",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/app/role/5",
+			"request": {
+				"url": "localhost:8000/api/app/role/5",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxMzQwNzQyOCwiZXhwIjoxNjEzNDExMDI4LCJuYmYiOjE2MTM0MDc0MjgsImp0aSI6ImdNd2VheXdMdndGYmJiSzYiLCJzdWIiOjgsInBydiI6Ijc1ZGJmMGJmZjlmYzhmZTgxMmQ0Y2MxNzdhODRmYzYyYTNiNGNjZjYifQ.1isOsVPxQKI5AiXHTGrOl5uwvv3Pf7u3pE992e9pEq4",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "role",
+							"value": "nama menu",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "deskripsi role",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/api/app/role/5",
+			"request": {
+				"url": "localhost:8000/api/app/role/5",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hcHBcL3JvbGVcLzUiLCJpYXQiOjE2MTM0MDc0MjgsImV4cCI6MTYxMzQxMTA0NSwibmJmIjoxNjEzNDA3NDQ1LCJqdGkiOiJza3RxV1pNelczYklSenVaIiwic3ViIjo4LCJwcnYiOiI3NWRiZjBiZmY5ZmM4ZmU4MTJkNGNjMTc3YTg0ZmM2MmEzYjRjY2Y2In0.nxahQu7ppNFg8Pw15kdYiCFG_8X5TYcwrb203H-SVOc",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "role",
+							"value": "nama menu",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "deskripsi role",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

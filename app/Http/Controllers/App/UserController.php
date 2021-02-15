@@ -18,16 +18,16 @@ class UserController extends Controller
 		$data	= $this->validate($request, User::rules['create']);
 		$data['password'] = app('hash')->make($data['password']);
 		$result = User::create($data);
-		return $this->response(['created'=>$result->id], 201);
+		return $this->response(['message'=>"Created ($result->id)"], 201);
     }
     
     public function update(Request $request, $id){
 		$data = $this->validate($request, User::rules['update']);
-		if(!empty($data['password']){
+		if(!empty($data['password'])){
 			$data['password'] = app('hash')->make($data['password']);
 		}
         $result = User::where('id',$id)->update($data);
-        return $this->response(['updated'=>$id]);
+		return $this->response(['message'=>"Updated ($id)"]);
     }
     
     public function delete($id){
@@ -35,7 +35,7 @@ class UserController extends Controller
 		$result = User::find($ids)->each(function($data, $key){
 			$data->delete();
 		}); 
-		return $this->response(['deleted'=>$id]);
+		return $this->response(['message'=>"Deleted ($id)"]);
     }
     
 }

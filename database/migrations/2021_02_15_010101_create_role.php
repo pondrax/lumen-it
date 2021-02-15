@@ -19,6 +19,13 @@ class CreateRole extends Migration
             $table->text('description');
             $table->timestamps();
         });
+        
+        DB::table('app_role')->insert([
+			['role' => 'Developer'		, 'description' => 'Main Developer'],
+			['role' => 'Administrator'	, 'description' => 'Administrator'],
+			['role' => 'Editor'			, 'description' => 'Editor'],
+			['role' => 'Member'			, 'description' => 'Member'],
+        ]);
     }
 
     /**
