@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<title>Api Test</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="css, library, drax, draxcss, light">
+	<meta name="description" content="A lightweight CSS library">
+	<link rel="stylesheet" href="/apis/assets/drax.css">
+	<style>
+	.badge:after {
+	width: auto;
+    border-radius: 1.5em;
+    font-size:.7em;
+    padding:.2em .5em;
+    background: inherit;
+	}
+    </style>
+	<script src="/apis/assets/vue.global.prod.js"></script>
+	
+</head>
+<body>
+	<div id="APP"class="p-4">
+		<h2>API Test <span class="small text-secondary"><small>v.0.1.0</small></span></h2>
+		<hr class="mt-0">
+		<div class="row six-lg">
+			
+			<section class="collections pr-3">
+				<v-text v-model="collections.filter" class="small" placeholder="Collections"></v-text>
+				<br>
+				<button v-for="col in filteredCollections" :class="methodClass[col.method]+' small badge block'" @click="setForm(col)" :data-badge="col.method">
+					{{ col.url.split('?')[0] }}
+				</button>
+			</section>
+			
+			<div class="fill row one two-lg">
+				<section class="form px-3 border-left">
+					<div class="row gap four">
+						<div>
+							<v-select v-model="form.method" :options="['GET','POST','PUT','DELETE']" placeholder="Method"></v-select>
+						</div>
+						<div class="fill">
+							<v-text v-model="form.url" class="small" placeholder="URL"></v-text>
+						</div>
+					</div>
+					
+<!--
+					<pre class="small">{{ form }}</pre>
+-->
+					<div class="border-bottom my-2"></div>
+					<div v-show="form.method!='GET'" class="small border">
+						<div class="row gap four">
+							<span class="py-0">Type</span>
+							<span class="py-0">Name</span>
+							<span class="py-0">Value</span>
+						</div>
+						<div v-for="opt in form.options" class="row gap four">
+							<v-select v-model="opt.type" :options="['text','file']" class="large"></v-select>
+							<v-text v-model="opt.key"></v-text>
+							<div class="fill">
+								<v-text v-if="opt.type=='text'" v-model="opt.value"></v-text>
+								<v-file v-else v-model="opt.value"></v-file>
+							</div>
+							
+						</div>
+					</div>
+					<button class="small secondary" @click="submit">Send</button>
+				</section>
+					
+					
+				<section class="result small pl-3 border-left">
+					<div v-if="status" class="large">
+						<span :class="(status.ok ? 'info': 'error')+' label'">{{ status.status }}</span>
+						<span :class="(status.ok ? 'info': 'error')+' label'">{{ status.statusText }}</span>
+					</div>
+					<label>Token</label>
+					<textarea class="small">{{ token }}</textarea>
+					
+					<label>Header</label>
+					<textarea class="small" style="height:150px">{{ header }}</textarea>
+					<br>
+					<label>Response</label>
+					<textarea class="small" style="height:300px">{{ response }}</textarea>
+				</section>
+			</div>
+				
+		</div>
+		
+	</div>
+	
+	<script src="/apis/collections.js"></script>
+	<script>
+		const app = Vue.createApp({
+			data(){
+				return {
+					baseurl : 'localhost:8000',
+					status	: null,
+					token : null,
+					header : null,
+					response: null,
+					loading : true,
+					form 	: {
+						method :'GET',
+						url :'',
+						body:null,
+						options : [
+							{ type: 'text', key:'', value:''},
+						]
+					},
+					methodClass:{
+						'GET' : '',
+						'POST' : 'success',
+						'PUT' : 'warning',
+						'DELETE' : 'error',
+					},
+					collections : {
+						filter 	: '',
+						data	: collections
+					}
+				};
+			},
+			watch:{
+				'form.options':{
+					handler(val){
+						var body = {};
+						var filled;
+						val.map(opt=>{
+							if(opt.key==''){
+								filled = true;
+							}
+							else{
+								body[opt.key] = opt.value;
+							}
+						});
+						
+						this.form.body = body;
+						if(!filled){
+							this.form.options.push({key:'',type:'text',value:''});
+						}
+					},
+					deep:true
+				},
+			},
+			computed:{
+				filteredCollections(){
+					var isExists = d=>d.url.includes(this.collections.filter);
+					return this.collections.data.filter(isExists);
+				}
+			},
+			methods:{
+				setForm(collection){
+					if(!collection.body){
+						collection.body = {};
+					}
+					this.form = Object.assign({}, collection);
+					var options = [];
+					Object.keys(collection.body).forEach(key=>{
+						options.push({type:'text', key:key, value:collection.body[key]});
+					});
+					this.form.options = options;
+				},
+				setData(form){	
+					var formData = new FormData();
+					Object.keys(form).forEach(name=>{
+						var value = form[name];
+						if(typeof value !=='undefined' && value !='undefined'){
+							formData.append(name,value)
+						}
+					})
+					return formData;
+				},
+				submit(){
+					this.loading = true;
+					var form = Object.assign({},this.form);
+					if(form.method == 'GET'){
+						// form.url += '?' + (new URLSearchParams(form.body)).toString();
+						body	= null;
+					}else{
+						body	= this.setData(form.body);
+					}
+					
+					fetch(form.url,{
+						method	: form.method,
+						body	: body,
+						headers	: {Authorization : 'Bearer '+ this.token}
+					}).then(status=>{
+						var headers = {};
+						status.headers.forEach((value, key)=>{
+							headers[key] = value;
+						});
+						this.status = status;
+						this.header = headers;
+						if(status.headers.has('jwt')){
+							this.token = status.headers.get('jwt');
+						}
+						if (status.ok) {
+							return status.json()
+						}else{
+							return status.text().then(err => Promise.reject(err));
+						}
+					}).then(response=>{
+						this.response = response;
+					}).catch(error=>{
+						this.response = error;
+						// console.log(error);
+					}).finally(_=>{
+						this.loading = false;
+					})
+					
+				}
+			}
+		});
+	</script>
+	<script src="/apis/assets/base.js"></script>
+	<script>
+		app.mount('#APP');		
+	</script>
+</body>
+</html>

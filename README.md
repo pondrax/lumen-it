@@ -9,6 +9,7 @@
 - run artisan jwt:secret
 - run artisan migrate
 - run composer start
+- test the API at http://localhost:8000/api
 
 ## Available Routing
 
