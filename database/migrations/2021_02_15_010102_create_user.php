@@ -21,6 +21,12 @@ class CreateUser extends Migration
             $table->string('password');
             $table->timestamps();
         });
+        
+        DB::table('app_user')->insert([
+        
+			['role_id' => 1	, 'username' => 'drax', 'email' => 'lumen@mail.com', 'password' => app('hash')->make('lumen123')],
+			
+		]);
     }
 
     /**

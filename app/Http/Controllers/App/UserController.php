@@ -10,7 +10,7 @@ class UserController extends Controller
 {
 	
     public function read($id = 'all'){
-        $result = User::table(); 
+        $result = User::with('role')->table(); 
         return $this->response($result);
     }
     

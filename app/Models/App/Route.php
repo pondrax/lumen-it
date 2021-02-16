@@ -20,4 +20,10 @@ class Route extends Model
 			'menu_id' => 'required',
 		]
 	];
+	
+	public function menu()
+    {
+        return $this->belongsTo('App\Models\App\Menu');
+    }
+
 }

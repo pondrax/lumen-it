@@ -16,8 +16,16 @@ class CreateMenu extends Migration
         Schema::create('app_menu', function (Blueprint $table) {
             $table->increments('id');
             $table->string('menu');
+            $table->integer('num');
             $table->timestamps();
         });
+        
+        DB::table('app_menu')->insert([
+			['menu' => 'Developer'	, 'num' => 99],
+			['menu' => 'App'		, 'num' => 98],
+			['menu' => 'Dashboard'	, 'num' => 1],
+			['menu' => 'Data'		, 'num' => 2],
+        ]);
     }
 
     /**

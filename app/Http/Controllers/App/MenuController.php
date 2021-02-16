@@ -10,7 +10,7 @@ class MenuController extends Controller
 {
 	
     public function read($id = 'all'){
-        $result = Menu::table(); 
+        $result = Menu::with('route')->table(); 
         return $this->response($result);
     }
     

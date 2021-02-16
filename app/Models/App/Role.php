@@ -20,4 +20,15 @@ class Role extends Model
 			// 'description' => 'required'
 		]
 	]; 
+	
+    public function user()
+    {
+        return $this->hasMany('App\Models\App\User');
+    }
+
+    public function access()
+    {
+        return $this->hasMany('App\Models\App\Access');
+    }
+
 }

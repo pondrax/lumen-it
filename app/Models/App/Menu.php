@@ -16,5 +16,9 @@ class Menu extends Model
 		],
 		'update' => []
 	]; 
-	
+    
+    public function route()
+    {
+        return $this->hasMany('App\Models\App\Route');
+    }
 }

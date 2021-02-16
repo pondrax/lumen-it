@@ -40,8 +40,7 @@ class AuthController extends Controller
         if (! $token = Auth::attempt($credentials)) {
             return $this->response(['message' => 'Username or Password doesn\'t match'], 401);
         }
-        
-		return $this->response(['message' => 'Welcome back :D'], 200);
+		return $this->response(['message' => 'Welcome back '.$request->post('username').' :D'], 200);
     }
     
 }

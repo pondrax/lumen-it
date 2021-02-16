@@ -10,7 +10,7 @@ class RouteController extends Controller
 {
 	
     public function read($id = 'all'){
-        $result = Route::table(); 
+        $result = Route::with('menu')->table(); 
         return $this->response($result);
     }
     

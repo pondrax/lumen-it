@@ -10,7 +10,7 @@ class AccessController extends Controller
 {
 	
     public function read($id = 'all'){
-        $result = Access::table(); 
+        $result = Access::with('role','route')->table(); 
         return $this->response($result);
     }
     

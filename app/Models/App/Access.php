@@ -18,4 +18,13 @@ class Access extends Model
 		'update' => []
 	]; 
 	
+    public function role()
+    {
+        return $this->belongsTo('App\Models\App\Role');
+    }
+    
+    public function route()
+    {
+        return $this->belongsTo('App\Models\App\Route');
+    }
 }

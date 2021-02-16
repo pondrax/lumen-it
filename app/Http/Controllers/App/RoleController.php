@@ -10,7 +10,7 @@ class RoleController extends Controller
 {
 	
     public function read($id = 'all'){
-        $result = Role::table(); 
+        $result = Role::with('access')->table(); 
         return $this->response($result);
     }
     

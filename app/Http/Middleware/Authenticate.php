@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use App\Models\App\Access;
+use App\Models\App\Route;
 
 class Authenticate
 {
@@ -36,8 +38,19 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
-        }
+            return response()->json(['message' => 'Unauthorized.'], 401);
+        }else{
+			// Check if current role is allowed
+			$user		= $this->auth->user();
+			$controller = str_replace('App\\Http\\Controllers\\', '', $request->route()[1]['uses']);
+			$route 		= Route::where('controller', $controller)->first();
+			
+			$access		= Access::where('role_id', $user->role_id)->where('route_id', $route->id);
+			// var_dump($user->role_id, $route->id);
+			if($access->doesntExist()){
+				return response()->json(['message' => 'Role is not Allowed for this Route.'], 401);
+			}
+		}
 
         return $next($request);
     }
