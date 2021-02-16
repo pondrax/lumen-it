@@ -7,6 +7,7 @@
 - copy .env.example to .env
 - run composer install
 - run artisan jwt:secret
+- run artisan migrate
 - run composer start
 
 ## Available Routing
@@ -31,3 +32,5 @@ curl -X POST \
   -F username=user \
   -F password=12345678
 ```
+
+Check for more other routes at routes/api.php
