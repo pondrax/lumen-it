@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<title>Api Test</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="css, library, drax, draxcss, light">
+	<meta name="description" content="A lightweight CSS library">
+	<link rel="stylesheet" href="/api/assets/drax.css">
+	<style>
+	.badge:after {
+	width: auto;
+    border-radius: 1.5em;
+    font-size:.7em;
+	}
+    </style>
+	<script src="/api/assets/vue.global.prod.js"></script>
+	
+</head>
+<body>
+	<div id="APP"class="p-4">
+		<h2>API Test <span class="small text-secondary"><small>v.0.1.0</small></span></h2>
+		<hr class="mt-0">
+		<div class="row four">
+			<div>
+				<h5>Collections</h5>
+				<button v-for="col in collections" class="small badge" @click="form = col" :data-badge="col.method">
+					{{ col.url }}
+				</button>
+			</div>
+			<div class="fill">
+				
+				<section class="form">
+					<div class="row gap four">
+						<div>
+							<v-select v-model="form.method" :options="['GET','POST','PUT','DELETE']" placeholder="Method"></v-select>
+						</div>
+						<div class="fill">
+							<v-text v-model="form.url" class="small" placeholder="URL"></v-text>
+						</div>
+					</div>
+					<div class="border-bottom"></div>
+					<div class="small border p-2">
+						<div class="row gap four">
+							<span>Name</span>
+							<div class="fill">
+								<span>Value</span>
+							</div>
+						</div>
+						<div v-for="(value,key) in form.body" class="row gap four">
+							<v-text v-model="key"></v-text>
+							<div class="fill">
+								<v-text v-model="value"></v-text>
+							</div>
+						</div>
+					</div>
+					<button class="small secondary" @click="submit">Send</button>
+				</section>
+				
+				
+				<hr>
+				
+				<section class="result small">
+					<label>Header</label>
+					<textarea class="small">{{ header }}</textarea>
+					<br>
+					<label>Response</label>
+					<textarea class="small" style="height:100px">{{ response }}</textarea>
+				</section>
+				
+			</div>
+		</div>
+		
+	</div>
+	
+	<script>
+		const collections = {
+			login : {
+				method :'POST',
+				url : 'api/auth/login',
+				body : {
+					username : 'drax',
+					password : 'lumen123'
+				}
+			},
+			register : {
+				method :'POST',
+				url : 'api/auth/register',
+				body : {
+					username : 'test',
+					mail	 : 'test@mail.com',
+					password : 'lumen123',
+				}
+			}
+		};
+		
+		const app = Vue.createApp({
+			data(){
+				return {
+					baseurl : 'localhost:8000',
+					header	: null,
+					response: null,
+					loading : true,
+					form 	: {
+						method :'GET',
+						url :'',
+						body:{}
+					},
+					collections : collections
+				};
+			},
+			methods:{
+				submit(){
+					fetch(this.form.url,{
+						method	: this.form.method,
+						body	: this.form.body
+					})
+					.then(r=>{
+						return r.json();
+					})
+					.then(r=>{
+						this.response = r;
+						console.log(r)
+					})
+				}
+			}
+		});
+	</script>
+	<script src="/api/assets/helper.js"></script>
+	<script src="/api/assets/base.js"></script>
+	<script>
+		app.mount('#APP');		
+	</script>
+</body>
+</html>
