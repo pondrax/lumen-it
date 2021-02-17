@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="css, library, drax, draxcss, light">
-	<meta name="description" content="A lightweight CSS library">
+	<meta name="description" content="An API tester">
 	<link rel="stylesheet" href="/apis/assets/drax.css">
 	<style>
 	.badge:after {
@@ -25,12 +25,25 @@
 		<hr class="mt-0">
 		<div class="row six-lg">
 			
-			<section class="collections pr-3">
-				<v-text v-model="collections.filter" class="small" placeholder="Collections"></v-text>
-				<br>
-				<button v-for="col in filteredCollections" :class="methodClass[col.method]+' small badge block'" @click="setForm(col)" :data-badge="col.method">
-					{{ col.url.split('?')[0] }}
-				</button>
+			<section class="collections border-bottom pr-3 pb-3">
+				<v-text v-model="collections.search" class="small" placeholder="Collections"></v-text>
+				
+				<div class="small py-2">
+					<div class="group small">
+						<button class="secondary" @click="collections.filter=''">All</button>
+						<button class="primary" @click="collections.filter='GET'">GET</button>
+						<button class="success" @click="collections.filter='POST'">POST</button>
+						<button class="warning" @click="collections.filter='PUT'">PUT</button>
+						<button class="error" @click="collections.filter='DELETE'">DELETE</button>
+					</div>
+				</div>
+				
+				<div class="overflow-y" style="max-height:65vh">
+					<button v-for="col in filteredCollections" :class="methodClass[col.method]+' small badge pr-5 mr-3'" @click="setForm(col)" :data-badge="col.method">
+						{{ col.url.split('?')[0] }}
+					</button>
+				</div>
+				
 			</section>
 			
 			<div class="fill row one two-lg">
@@ -44,11 +57,8 @@
 						</div>
 					</div>
 					
-<!--
-					<pre class="small">{{ form }}</pre>
--->
 					<div class="border-bottom my-2"></div>
-					<div v-show="form.method!='GET'" class="small border">
+					<div v-show="!['GET','DELETE'].includes(form.method)" class="small border">
 						<div class="row gap four">
 							<span class="py-0">Type</span>
 							<span class="py-0">Name</span>
@@ -64,15 +74,19 @@
 							
 						</div>
 					</div>
-					<button class="small secondary" @click="submit">Send</button>
+					<button v-if="loading" class="small muted">Loading ... </button>
+					<button v-else class="small secondary" @click="submit">Send</button>
+					<pre class="small overflow-y" style="max-height:30vh;white-space:pre-wrap">{{ formRequest }}</pre>
 				</section>
 					
 					
 				<section class="result small pl-3 border-left">
-					<div v-if="status" class="large">
+					<div v-if="status" class="group large">
 						<span :class="(status.ok ? 'info': 'error')+' label'">{{ status.status }}</span>
 						<span :class="(status.ok ? 'info': 'error')+' label'">{{ status.statusText }}</span>
 					</div>
+					<br>
+					
 					<label>Token</label>
 					<textarea class="small">{{ token }}</textarea>
 					
@@ -98,11 +112,11 @@
 					token : null,
 					header : null,
 					response: null,
-					loading : true,
+					loading : false,
 					form 	: {
 						method :'GET',
 						url :'',
-						body:null,
+						body:{},
 						options : [
 							{ type: 'text', key:'', value:''},
 						]
@@ -114,7 +128,8 @@
 						'DELETE' : 'error',
 					},
 					collections : {
-						filter 	: '',
+						search 	: '',
+						filter	: '',
 						data	: collections
 					}
 				};
@@ -124,7 +139,7 @@
 					handler(val){
 						var body = {};
 						var filled;
-						val.map(opt=>{
+						val.forEach(opt=>{
 							if(opt.key==''){
 								filled = true;
 							}
@@ -143,9 +158,18 @@
 			},
 			computed:{
 				filteredCollections(){
-					var isExists = d=>d.url.includes(this.collections.filter);
+					var isExists = d => {
+						var searched = d.url.includes(this.collections.search);
+						var filtered = d.method.includes(this.collections.filter);
+						return searched && filtered;
+					};
 					return this.collections.data.filter(isExists);
-				}
+				},
+				formRequest(){
+					var form = Object.assign({}, this.form);
+					delete form.options;
+					return form;
+				}				
 			},
 			methods:{
 				setForm(collection){
@@ -153,9 +177,8 @@
 						collection.body = {};
 					}
 					this.form = Object.assign({}, collection);
-					var options = [];
-					Object.keys(collection.body).forEach(key=>{
-						options.push({type:'text', key:key, value:collection.body[key]});
+					var options = Object.keys(collection.body).map(key=>{
+						return {type:'text', key:key, value:collection.body[key]};
 					});
 					this.form.options = options;
 				},
@@ -172,7 +195,7 @@
 				submit(){
 					this.loading = true;
 					var form = Object.assign({},this.form);
-					if(form.method == 'GET'){
+					if(['GET','DELETE'].includes(form.method)){
 						// form.url += '?' + (new URLSearchParams(form.body)).toString();
 						body	= null;
 					}else{
